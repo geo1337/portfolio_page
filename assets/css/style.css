@@ -2478,12 +2478,18 @@ img {
   outline: none; }
 
 .wrapper-contact {
-  min-height: 80vh;
+ /* min-height: 80vh; */
   display: flex;
   align-items: center;
 
 }
 
+@media (min-width: 1024px) {
+  .inner,
+  .modal-content {
+    width: 750px !important;
+  }
+}
 .inner {
   width: 600px;
 
