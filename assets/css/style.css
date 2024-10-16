@@ -37,6 +37,22 @@ body {
   z-index: 99999999999 !important;
 }
 
+   .pdf-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* Verhältnis für 4:3 */
+        }
+
+        .pdf-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
 .cursor:first-child {
   background-color: #fff;
   --circle:8px
@@ -179,6 +195,62 @@ h1, h2, h3, h4, h5, h6 {
     -o-transition: background-color 2s ease-out;
     transition: background-color 2s ease-out;
 }
+
+.darkmodeabout .swiper-slide .testimonial-item p{
+  background-color:#040b14 !important;
+  color: white !important;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+ }
+
+.darkmodeabout .count-box span,
+ .darkmodeabout .skill, 
+.darkmodeabout .resume-item h4 {
+  color: #fff !important;
+}
+
+.darkmodeabout .resume-item h5,
+.darkmodeabout .resume-title {
+  background: unset !important;
+  color: #fff !important;
+}
+
+.darkmodeabout .title a {
+  color: #fff !important;
+}
+
+.darkmodeabout .accordion .accordion-item {
+  background-color:#040b14 !important;
+  color: white !important;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+}
+
+.darkmodeabout .accordion .accordion-button {
+  background-color:#040b14 !important;
+  color: white !important;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+}
+
+
+.darkmodeabout .info,
+.darkmodeabout .info h4,
+.darkmodeabout .info p {
+  background-color:#040b14 !important;
+  color: white !important;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+}
+
 
 
 .video-play-button:after {
