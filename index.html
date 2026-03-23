@@ -1108,6 +1108,25 @@
           opacity: 1;
         }
       }
+      @media (max-width: 600px) {
+  .coffee-inner {
+    flex-direction: column;   /* ⬅️ das ist der Key */
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .coffee-inner dotlottie-player {
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto;          /* optional: zentrieren */
+    order: 2;                /* ⬅️ sorgt dafür, dass es UNTER dem JSON ist */
+  }
+
+  .coffee-json {
+    order: 1;
+    width: 100%;
+  }
+}
 
       /* ═══════════════════════════════════════
    STATUS BAR
@@ -2504,65 +2523,7 @@
 /* =========================
    CMD MOBILE OPTIMIZATION
 ========================= */
-@media (max-width: 600px) {
 
-  /* Overlay padding weg → full screen feel */
-  #win-overlay {
-    align-items: flex-end;
-  }
-
-  #cmd-win {
-    width: 100%;
-    height: 100vh; /* full height */
-    max-height: 100vh;
-    border-radius: 0;
-    font-size: 14px; /* besser lesbar */
-  }
-
-  /* Titlebar größer für Touch */
-  #cmd-titlebar {
-    height: 36px;
-    padding: 0 10px;
-  }
-
-  .win-ctrl {
-    width: 52px;
-    height: 36px;
-    font-size: 18px;
-  }
-
-  #cmd-wintitle {
-    font-size: 13px;
-  }
-
-  /* Body mehr Padding + smoother scroll */
-  #cmd-body {
-    padding: 10px;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  /* Input Bereich */
-  #cmd-inputrow {
-    padding: 6px 10px 10px;
-  }
-
-  #cmd-field {
-    font-size: 14px;
-    white-space: pre-wrap; /* wichtig → kein Abschneiden */
-    word-break: break-word;
-  }
-
-  /* Prompt kleiner Abstand */
-  #cmd-ps {
-    font-size: 13px;
-  }
-
-  /* Scrollbar für Touch nicer */
-  #cmd-body::-webkit-scrollbar {
-    width: 4px;
-  }
-}
 
         /* About */
         .ag {
@@ -2806,7 +2767,26 @@
           top: 44px;
         }
       }
+@media (max-width: 600px) {
 
+  #win-overlay {
+    align-items: flex-end; /* bleibt unten */
+  }
+
+  #cmd-win {
+    width: 100%;
+    
+    /* 🔥 wichtigste Änderung */
+    height: 55svh;        /* stabile viewport height */
+    max-height: 55svh;
+
+    /* Fallback für ältere Browser */
+    height: 55vh;
+
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+  }
+}
       /* ── TESTIMONIALS ── */
       .tm-swiper {
         overflow: hidden;
