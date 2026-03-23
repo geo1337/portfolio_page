@@ -38,6 +38,7 @@
         box-sizing: border-box;
       }
       html {
+        overflow-x: hidden
       }
       body {
         background: var(--bg);
@@ -50,11 +51,7 @@
         margin: 0;
       }
 
-      body.modal-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-}
+
 
       /* ── wrapper ── */
       .glitch-wrap {
@@ -639,7 +636,7 @@
         background: var(--green);
         border-radius: 50%;
         pointer-events: none;
-        z-index: 9999;
+        z-index: 999999 !important;
         transform: translate(-50%, -50%);
       }
       #cursor-ring {
@@ -649,7 +646,7 @@
         border: 1.5px solid var(--green);
         border-radius: 50%;
         pointer-events: none;
-        z-index: 9998;
+        z-index: 999998 !important;
         transform: translate(-50%, -50%);
       }
 
@@ -1722,53 +1719,61 @@
         transform: scale(1.3);
       }
       @media (max-width: 600px) {
-       #proj-modal {
-    align-items: flex-start;
-  }
+        #proj-modal {
+          padding: 16px;
+          align-items: center;
+          justify-content: center;
+          position: fixed;
+          inset: 0;
+        }
 
-  #proj-modal-inner {
-    width: 100%;
-    
-    /* 🔥 wichtig: KEIN vh */
-    height: 85svh;
-    max-height: 85svh;
+        #proj-modal-inner {
+          width: 100%;
+          max-height: 88svh;
+          height: auto;
+          border-radius: 4px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          animation: modal-in-mobile 0.25s ease;
+        }
 
-    border-radius: 16px 16px 0 0;
-    overflow: hidden;
+        @keyframes modal-in-mobile {
+          from { opacity: 0; transform: scale(0.96); }
+          to   { opacity: 1; transform: scale(1); }
+        }
 
-    display: flex;
-    flex-direction: column;
-  }
+        #proj-modal-img-wrap {
+          aspect-ratio: 16/9;
+          max-height: 35%;
+          flex-shrink: 0;
+        }
 
-  /* 📸 Bild kleiner machen */
-  #proj-modal-img-wrap {
-    aspect-ratio: 16/9;
-    max-height: 30%;
-  }
+        #proj-modal-body {
+          flex: 1;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          padding: 20px;
+        }
 
-  /* 📜 Body scrollt separat */
-  #proj-modal-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-  }
+        #proj-modal-title {
+          font-size: 17px;
+        }
 
-  /* ❌ Close Button fixen */
-  #proj-modal-close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    z-index: 5;
-    font-size: 12px;
-    padding: 6px 10px;
-  }
+        #proj-modal-close {
+          position: absolute;
+          top: 10px;
+          right: 12px;
+          z-index: 5;
+          font-size: 11px;
+          padding: 5px 10px;
+        }
 
-  /* 👆 Slider Buttons besser klickbar */
-  .modal-slider-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 18px;
-  }
+        .modal-slider-btn {
+          width: 44px;
+          height: 44px;
+          font-size: 18px;
+        }
       }
 
       /* ── TOUCH DEVICE OPTIMISATIONS ── */
@@ -3654,17 +3659,7 @@
         </div>
       </div>
     </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="section-with-lottie">
-        <div class="sw">
-          <div class="sh">
-            <span class="sn">02.</span>
-            <h2 class="st">projects</h2>
-            <div class="sl"></div>
-          </div>
-          <!-- PROJECT MODAL -->
+   <!-- PROJECT MODAL -->
           <div id="proj-modal" onclick="if (event.target === this) closeProjModal();">
             <div id="proj-modal-inner">
               <div id="proj-modal-top-bar"></div>
@@ -3684,6 +3679,16 @@
               </div>
             </div>
           </div>
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-with-lottie">
+        <div class="sw">
+          <div class="sh">
+            <span class="sn">02.</span>
+            <h2 class="st">projects</h2>
+            <div class="sl"></div>
+          </div>
+       
 
           <div class="pc-grid">
             <!-- project_001 -->
@@ -4748,7 +4753,7 @@ onclick="openProjModal('project_001', 'ThesisRadar', 'Automated thesis position 
         setTimeout(function () {
           printLine('C:\\Users\\Georg\\Portfolio>', 'g');
           blank();
-          printLine('Welcome Visitor.', 'cyn');
+          printLine('Welcome visitor.', 'cyn');
           printLine('Type  help  for available commands.', 'g');
           printLine('Type  run   to launch portfolio.exe', 'g');
           blank();
@@ -4768,13 +4773,14 @@ onclick="openProjModal('project_001', 'ThesisRadar', 'Automated thesis position 
 
         // Init Lenis smooth scroll
         if (typeof Lenis !== 'undefined') {
-          var lenis = new Lenis({
+          window._lenis = new Lenis({
             duration: 1.2,
             easing: function (t) {
               return Math.min(1, 1.001 - Math.pow(2, -10 * t));
             },
             smoothTouch: false,
           });
+          var lenis = window._lenis;
           // Sync with GSAP ScrollTrigger
           if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             lenis.on('scroll', ScrollTrigger.update);
@@ -5929,27 +5935,21 @@ onclick="openProjModal('project_001', 'ThesisRadar', 'Automated thesis position 
         document.getElementById('proj-modal-num').textContent = '// ' + num;
         document.getElementById('proj-modal-title').textContent = title;
         document.getElementById('proj-modal-desc').textContent = desc;
-document.body.classList.add("modal-open");
-document.body.style.top = `-${window.scrollY}px`;
-        // Build slides — imgs can be '' or 'a.png' or 'a.png|b.png|c.png'
+
+        // Build slides
         modalSlides = imgs
-          ? imgs
-              .split('|')
-              .map(function (s) {
-                return s.trim();
-              })
-              .filter(Boolean)
+          ? imgs.split('|').map(function (s) { return s.trim(); }).filter(Boolean)
           : [];
         modalSlideIdx = 0;
 
         var slidesWrap = document.getElementById('proj-modal-slides');
-        var noImg = document.getElementById('proj-modal-no-img');
-        var btnPrev = document.getElementById('modal-btn-prev');
-        var btnNext = document.getElementById('modal-btn-next');
-        var dotsWrap = document.getElementById('modal-dots');
+        var noImg     = document.getElementById('proj-modal-no-img');
+        var btnPrev   = document.getElementById('modal-btn-prev');
+        var btnNext   = document.getElementById('modal-btn-next');
+        var dotsWrap  = document.getElementById('modal-dots');
 
         slidesWrap.innerHTML = '';
-        dotsWrap.innerHTML = '';
+        dotsWrap.innerHTML   = '';
 
         if (modalSlides.length > 0) {
           noImg.style.display = 'none';
@@ -5965,9 +5965,7 @@ document.body.style.top = `-${window.scrollY}px`;
             var dot = document.createElement('div');
             dot.className = 'modal-slider-dot' + (i === 0 ? ' active' : '');
             dot.setAttribute('data-idx', i);
-            dot.onclick = function () {
-              goToSlide(parseInt(this.getAttribute('data-idx')));
-            };
+            dot.onclick = function () { goToSlide(parseInt(this.getAttribute('data-idx'))); };
             dotsWrap.appendChild(dot);
           });
           var multi = modalSlides.length > 1;
@@ -5980,42 +5978,32 @@ document.body.style.top = `-${window.scrollY}px`;
         }
 
         var tagsWrap = document.getElementById('proj-modal-tags');
-        tagsWrap.innerHTML = tagsStr
-          .split(',')
-          .map(function (t) {
-            return '<span>' + t.trim() + '</span>';
-          })
-          .join('');
+        tagsWrap.innerHTML = tagsStr.split(',').map(function (t) {
+          return '<span>' + t.trim() + '</span>';
+        }).join('');
+
+        // Stop Lenis so it doesn't fight the fixed modal overlay
+        if (window._lenis) window._lenis.stop();
 
         document.getElementById('proj-modal').classList.add('open');
-        document.body.style.overflow = 'hidden';
       }
 
       function goToSlide(idx) {
         var slides = document.querySelectorAll('.modal-slide');
-        var dots = document.querySelectorAll('.modal-slider-dot');
+        var dots   = document.querySelectorAll('.modal-slider-dot');
         if (!slides.length) return;
         idx = (idx + slides.length) % slides.length;
         modalSlideIdx = idx;
-        slides.forEach(function (s, i) {
-          s.classList.toggle('active', i === idx);
-        });
-        dots.forEach(function (d, i) {
-          d.classList.toggle('active', i === idx);
-        });
+        slides.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+        dots.forEach(function (d, i)   { d.classList.toggle('active', i === idx); });
       }
 
-      function modalSlide(dir) {
-        goToSlide(modalSlideIdx + dir);
-      }
+      function modalSlide(dir) { goToSlide(modalSlideIdx + dir); }
 
       function closeProjModal() {
         document.getElementById('proj-modal').classList.remove('open');
-        document.body.style.overflowY = 'scroll';
-        const scrollY = document.body.style.top;
-document.body.classList.remove("modal-open");
-document.body.style.top = "";
-window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        // Resume Lenis — scroll position is unchanged because we never touched body
+        if (window._lenis) window._lenis.start();
       }
 
       document.addEventListener('keydown', function (e) {
