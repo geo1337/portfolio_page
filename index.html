@@ -1108,25 +1108,6 @@
           opacity: 1;
         }
       }
-      @media (max-width: 600px) {
-  .coffee-inner {
-    flex-direction: column;   /* ⬅️ das ist der Key */
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .coffee-inner dotlottie-player {
-    width: 100%;
-    max-width: 180px;
-    margin: 0 auto;          /* optional: zentrieren */
-    order: 2;                /* ⬅️ sorgt dafür, dass es UNTER dem JSON ist */
-  }
-
-  .coffee-json {
-    order: 1;
-    width: 100%;
-  }
-}
 
       /* ═══════════════════════════════════════
    STATUS BAR
@@ -2520,11 +2501,50 @@
         #nav-input-wrap {
           max-width: 160px;
         }
-/* =========================
-   CMD MOBILE OPTIMIZATION
-========================= */
+
+     
+
+  #win-overlay {
+    align-items: flex-end; /* bleibt unten */
+  }
+
+  #cmd-win {
+    width: 100%;
+    
+    /* 🔥 wichtigste Änderung */
+    height: 55svh;        /* stabile viewport height */
+    max-height: 55svh;
+
+    /* Fallback für ältere Browser */
+    height: 55vh;
 
 
+    overflow: hidden;
+  }
+
+
+  #toast-result {
+    white-space: unset;
+    line-height: 1.8;
+}
+
+    .coffee-inner {
+    flex-direction: column;   /* ⬅️ das ist der Key */
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .coffee-inner dotlottie-player {
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto;          /* optional: zentrieren */
+    order: 2;                /* ⬅️ sorgt dafür, dass es UNTER dem JSON ist */
+  }
+
+  .coffee-json {
+    order: 1;
+    width: 100%;
+  }
         /* About */
         .ag {
           grid-template-columns: 1fr;
@@ -2767,26 +2787,7 @@
           top: 44px;
         }
       }
-@media (max-width: 600px) {
 
-  #win-overlay {
-    align-items: flex-end; /* bleibt unten */
-  }
-
-  #cmd-win {
-    width: 100%;
-    
-    /* 🔥 wichtigste Änderung */
-    height: 55svh;        /* stabile viewport height */
-    max-height: 55svh;
-
-    /* Fallback für ältere Browser */
-    height: 55vh;
-
-    border-radius: 16px 16px 0 0;
-    overflow: hidden;
-  }
-}
       /* ── TESTIMONIALS ── */
       .tm-swiper {
         overflow: hidden;
